@@ -31,10 +31,19 @@ def organize(folder: Path) -> int:
     3. 대상 폴더가 없으면 만들 것 (mkdir(exist_ok=True))
     4. 같은 이름 파일이 이미 있으면 덮어쓰지 말고 건너뛸 것 (옮긴 수에 미포함)
     """
+
     moved = 0
-    # TODO: 여기를 구현하세요.
-    # 힌트: folder.iterdir(), p.is_file(), p.suffix.lower(),
-    #       shutil.move(str(src), str(dst))
+    for p in folder.iterdir():
+        if not p.is_file():
+            continue  # 하위 폴더는 건드리지 않음
+        category = CATEGORIES.get(p.suffix.lower(), "etc")
+        dst_folder = folder / category
+        dst_folder.mkdir(exist_ok=True)
+        dst = dst_folder / p.name
+        if dst.exists():
+            continue
+        shutil.move(str(p), str(dst))
+        moved += 1
     return moved
 
 
