@@ -28,7 +28,10 @@ def fetch_page(url: str) -> BeautifulSoup:
     2. resp.raise_for_status() 로 HTTP 에러 시 예외 발생
     """
     # TODO: 구현하세요. 힌트: requests.get(...), BeautifulSoup(resp.text, "html.parser")
-    raise NotImplementedError
+
+    resp = requests.get(url, timeout=10)
+    resp.raise_for_status()
+    return BeautifulSoup(resp.text, "html.parser")
 
 
 def parse_quotes(soup: BeautifulSoup) -> list[dict]:
