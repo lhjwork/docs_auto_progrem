@@ -21,14 +21,14 @@ def double(n):
     return n * 2
 
 expected_1 = None            # TODO: double(4) 의 값
-assert expected_1 == double(4), f"double(4) 는 {double(4)}"
+assert expected_1 == double(4), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
 
 def double_twice(n):
     return double(double(n))  # 안쪽 double 이 먼저 → 그 결과가 바깥 double 로
 
 expected_2 = None            # TODO: double_twice(3) 의 값
-assert expected_2 == double_twice(3), f"double_twice(3) 는 {double_twice(3)}"
+assert expected_2 == double_twice(3), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
 
 def first_word(text):
@@ -50,7 +50,7 @@ def no_return(n):
     n * 2                     # return 이 없다!
 
 expected_5 = "???"           # TODO: no_return(4) 의 값. 힌트: return 없는 함수는 None 을 돌려준다
-assert expected_5 == no_return(4), f"no_return(4) 는 {no_return(4)!r}"
+assert expected_5 == no_return(4), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
 
 def early_return(items):
@@ -60,10 +60,10 @@ def early_return(items):
     return None               # for 가 다 돌았는데 못 찾으면
 
 expected_6 = None            # TODO: early_return([3, 15, 20]) 의 값. 15? 20? 리스트?
-assert expected_6 == early_return([3, 15, 20]), f"실제: {early_return([3, 15, 20])}"
+assert expected_6 == early_return([3, 15, 20]), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
 expected_7 = "???"           # TODO: early_return([1, 2, 3]) 의 값
-assert expected_7 == early_return([1, 2, 3]), f"실제: {early_return([1, 2, 3])!r}"
+assert expected_7 == early_return([1, 2, 3]), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
 
 # ==================== 파트 2: 함수 작성 ====================
