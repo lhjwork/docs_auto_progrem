@@ -44,8 +44,13 @@ def parse_quotes(soup: BeautifulSoup) -> list[dict]:
     - 본문: span.text / 저자: small.author / 태그: a.tag (여러 개)
     - soup.select("div.quote"), q.select_one("span.text").get_text()
     """
-    # TODO: 구현하세요.
-    raise NotImplementedError
+    results = []
+    for q in soup.select("div.quote"):
+        text = q.select_one("span.text").get_text()
+        author = q.select_one("small.author").get_text()
+        tags = ",".join([t.get_text() for t in q.select("a.tag")])
+        results.append({"text": text, "author": author, "tags": tags})
+    return results
 
 
 def next_page_url(soup: BeautifulSoup) -> str | None:
@@ -54,8 +59,10 @@ def next_page_url(soup: BeautifulSoup) -> str | None:
     힌트: li.next > a 의 href 속성. BASE_URL + href
     """
     # TODO: 구현하세요.
-    raise NotImplementedError
-
+    next_page = soup.select_one("li.next > a")
+    if next_page:
+        return BASE_URL + next_page["href"]
+    return None
 
 def crawl_all() -> list[dict]:
     """전체 페이지 순회. 페이지 사이 time.sleep(0.5) — 상대 서버 배려는 기본기."""
