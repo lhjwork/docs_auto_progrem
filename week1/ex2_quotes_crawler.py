@@ -16,6 +16,7 @@ from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
+from collections import Counter
 
 BASE_URL = "https://quotes.toscrape.com"
 
@@ -84,6 +85,11 @@ def save_csv(quotes: list[dict], path: Path):
         writer.writeheader()
         writer.writerows(quotes)
 
+def top_authors(quotes: list[dict], n: int = 5) -> list[tuple[str, int]]:
+    """저자별 명언 수를 세어 상위 n명 반환."""
+    counter = Counter(q["author"] for q in quotes)
+    return counter.most_common(n)
+
 
 def _self_check():
     quotes = crawl_all()
@@ -94,6 +100,9 @@ def _self_check():
     assert "," in quotes[0]["tags"] or quotes[0]["tags"], "tags는 쉼표로 합친 문자열"
     out = Path(__file__).parent / "quotes.csv"
     save_csv(quotes, out)
+    top = top_authors(quotes)
+    assert top[0] == ("Albert Einstein", 10), f"1위는 Einstein 10건, 실제: {top[0]}"
+    print("저자 TOP 5:", top)
     print(f"PASS ✅ ex2 완료 — {out} 저장됨. 커밋하세요")
 
 
