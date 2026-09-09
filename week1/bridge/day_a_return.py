@@ -20,14 +20,14 @@
 def double(n):
     return n * 2
 
-expected_1 = None            # TODO: double(4) 의 값
+expected_1 = 8            # TODO: double(4) 의 값
 assert expected_1 == double(4), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
 
 def double_twice(n):
     return double(double(n))  # 안쪽 double 이 먼저 → 그 결과가 바깥 double 로
 
-expected_2 = None            # TODO: double_twice(3) 의 값
+expected_2 = 12           # TODO: double_twice(3) 의 값
 assert expected_2 == double_twice(3), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
 
@@ -35,21 +35,21 @@ def first_word(text):
     words = text.split()      # "hello big world" → ["hello", "big", "world"]
     return words[0]
 
-expected_3 = None            # TODO: first_word("hello big world") 의 값 (문자열)
+expected_3 = "hello"           # TODO: first_word("hello big world") 의 값 (문자열)
 assert expected_3 == first_word("hello big world")
 
 
 def count_words(text):
     return len(text.split())
 
-expected_4 = None            # TODO: count_words("a b c d") 의 값
+expected_4 = 4           # TODO: count_words("a b c d") 의 값
 assert expected_4 == count_words("a b c d")
 
 
 def no_return(n):
     n * 2                     # return 이 없다!
 
-expected_5 = "???"           # TODO: no_return(4) 의 값. 힌트: return 없는 함수는 None 을 돌려준다
+expected_5 = None           # TODO: no_return(4) 의 값. 힌트: return 없는 함수는 None 을 돌려준다
 assert expected_5 == no_return(4), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
 
@@ -59,10 +59,10 @@ def early_return(items):
             return x          # 여기서 함수 전체가 끝남. for 도 끝
     return None               # for 가 다 돌았는데 못 찾으면
 
-expected_6 = None            # TODO: early_return([3, 15, 20]) 의 값. 15? 20? 리스트?
+expected_6 = 15            # TODO: early_return([3, 15, 20]) 의 값. 15? 20? 리스트?
 assert expected_6 == early_return([3, 15, 20]), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
-expected_7 = "???"           # TODO: early_return([1, 2, 3]) 의 값
+expected_7 = None           # TODO: early_return([1, 2, 3]) 의 값
 assert expected_7 == early_return([1, 2, 3]), "예측이 틀렸다. 종이에 다시 따라가 볼 것"
 
 
@@ -70,16 +70,14 @@ assert expected_7 == early_return([1, 2, 3]), "예측이 틀렸다. 종이에 �
 
 def add(a, b):
     """두 수의 합을 반환"""
-    # TODO
-    raise NotImplementedError
+    return a + b
 
 assert add(2, 3) == 5
 
 
 def longest(words):
     """단어 리스트에서 가장 긴 단어를 반환. 힌트: max(words, key=len)"""
-    # TODO
-    raise NotImplementedError
+    return max(words, key=len)
 
 assert longest(["a", "abc", "ab"]) == "abc"
 
@@ -90,7 +88,11 @@ def find_author(quotes, text_part):
     힌트: early_return 과 같은 모양. for → if text_part in q["text"] → return q["author"]
     """
     # TODO
-    raise NotImplementedError
+    # 딕셔러리 조회
+    for q in quotes:
+        if text_part in q["text"]:
+            return q["author"]
+    return None
 
 sample = [
     {"text": "The world as we have created it", "author": "Albert Einstein"},
@@ -106,7 +108,7 @@ def summarize(quotes):
     힌트: return len(quotes), quotes[0]["author"]   ← 콤마로 두 값을 한 번에 반환
     """
     # TODO
-    raise NotImplementedError
+    return len(quotes), quotes[0]["author"]  # 튜플로 반환
 
 count, first = summarize(sample)   # 튜플을 두 변수로 풀어 받기
 assert count == 2 and first == "Albert Einstein"
